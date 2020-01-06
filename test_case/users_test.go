@@ -37,7 +37,7 @@ func TestCreateEntry(t *testing.T) {
 	r.ServeHTTP(w, req)
 
 	// Check to see if the response was what you expected
-	if w.Code == http.StatusOK {
+	if w.Code != http.StatusOK {
 		t.Fatalf("Expected to get status %d but instead got %d\n", http.StatusOK, w.Code)
 	}
 }
