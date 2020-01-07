@@ -19,9 +19,6 @@ func TestCreateEntry(t *testing.T) {
 	r := gin.Default()
 	r.POST("/api/user", controllers.SaveUserData)
 
-	// Create the mock request you'd like to test. Make sure the second argument
-	// here is the same as one of the routes you defined in the router setup
-	// block!
 	req, err := http.NewRequest(http.MethodPost, "/api/user", bytes.NewBuffer(jsonStr))
 
 	if err != nil {
