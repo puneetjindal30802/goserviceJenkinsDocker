@@ -2,7 +2,7 @@ package testing
 
 import (
 	"bytes"
-	"goserviceJenkinsDocker/controllers"
+	"github.com/puneetjindal30802/goserviceJenkinsDocker/controllers"
 	"net/http"
 	"net/http/httptest"
 	"testing"
