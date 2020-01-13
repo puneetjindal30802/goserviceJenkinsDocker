@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/puneetjindal30802/goserviceJenkinsDocker/controllers"
+	"goserviceJenkinsDocker/controllers"
 )
 
 type Route struct {

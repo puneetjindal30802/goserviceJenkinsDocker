@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/puneetjindal30802/goserviceJenkinsDocker/config"
-	"github.com/puneetjindal30802/goserviceJenkinsDocker/models"
+	"goserviceJenkinsDocker/config"
+	"goserviceJenkinsDocker/models"
 
 	"github.com/gin-gonic/gin"
 )

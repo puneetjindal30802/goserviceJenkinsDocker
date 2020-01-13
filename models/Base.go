@@ -2,7 +2,7 @@ package models
 
 import (
 	"errors"
-	"github.com/puneetjindal30802/goserviceJenkinsDocker/config"
+	"goserviceJenkinsDocker/config"
 
 	"gopkg.in/mgo.v2/bson"
 )

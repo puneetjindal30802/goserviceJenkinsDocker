@@ -1,6 +1,6 @@
 package models
 
-import "github.com/puneetjindal30802/goserviceJenkinsDocker/config"
+import "goserviceJenkinsDocker/config"
 
 type User struct {
 	Id    int    `json:"_id" bson:"_id"`
