@@ -1,9 +1,8 @@
 package config
 
 import (
-	"crypto/tls"
-	"fmt"
-	"net"
+	"log"
+	"time"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -19,56 +18,21 @@ type Counter struct {
  *
  *	Return databse connection.
  */
-func ConnectDb(Db string) (mongoSession *mgo.Session) {
-	// mongoDBDialInfo := &mgo.DialInfo{
-	// 	Addrs: []string{"mongodb+srv://puneet:1234@cluster0-a8zxr.mongodb.net/test?retryWrites=true&w=majority"},
-	// 	// Addrs:    []string{"172.20.1.100:27017"},
-	// 	Timeout:  60 * time.Second,
-	// 	Database: Db,
-	// }
+func ConnectDb(merchantDb string) (mongoSession *mgo.Session) {
+	mongoDBDialInfo := &mgo.DialInfo{
+		Addrs:    []string{"127.0.0.1:27017"},
+		Timeout:  60 * time.Second,
+		Database: merchantDb,
+	}
 
-	// mongoSession, err := mgo.DialWithInfo(mongoDBDialInfo)
-	// if err != nil {
-	// 	log.Fatalf("CreateSession: %s\n", err)
-	// }
-	// mongoSession.SetMode(mgo.Monotonic, true)
-
-	// return mongoSession
-
-	info, err := mgo.ParseURL("mongodb://puneet:1234@cluster0-shard-00-00-a8zxr.mongodb.net:27017,cluster0-shard-00-01-a8zxr.mongodb.net:27017,cluster0-shard-00-02-a8zxr.mongodb.net:27017/institute?authSource=admin")
+	mongoSession, err := mgo.DialWithInfo(mongoDBDialInfo)
 	if err != nil {
-		panic(fmt.Errorf("%s", err))
+		log.Fatalf("CreateSession: %s\n", err)
 	}
-	tlsConfig := &tls.Config{}
-	info.DialServer = func(addr *mgo.ServerAddr) (net.Conn, error) {
-		conn, err := tls.Dial("tcp", addr.String(), tlsConfig)
-		return conn, err
-	}
-	mongoSession, err = mgo.DialWithInfo(info)
-	if err != nil {
-		panic(fmt.Errorf("%s", err))
-	}
-
 	mongoSession.SetMode(mgo.Monotonic, true)
 
 	return mongoSession
 }
-
-// func ConnectDb(merchantDb string) (mongoSession *mgo.Session) {
-// 	mongoDBDialInfo := &mgo.DialInfo{
-// 		Addrs:    []string{"localhost:27017"},
-// 		Timeout:  60 * time.Second,
-// 		Database: merchantDb,
-// 	}
-
-// 	mongoSession, err := mgo.DialWithInfo(mongoDBDialInfo)
-// 	if err != nil {
-// 		log.Fatalf("CreateSession: %s\n", err)
-// 	}
-// 	mongoSession.SetMode(mgo.Monotonic, true)
-
-// 	return mongoSession
-// }
 
 /*
 * Function to insert the counter id if not exist
