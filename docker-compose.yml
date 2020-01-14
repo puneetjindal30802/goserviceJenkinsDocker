@@ -1,15 +1,16 @@
 version: '3'
 services:
   goweb:
-    build: .
+    container_name: 'goserviceJenkinsDocker'
+    build: '.'
     ports:
-      - "8080:8080"
-    links:
-      - mongo
-  mongo:
-    container_name: mongo
-    image: mongo
+      - '8080:8080'
     volumes:
-      - ./data:/data/db
+      - './goserviceJenkinsDocker:/go/src/goserviceJenkinsDocker'
+    depends_on:
+      - 'mongo'
+  mongo:
+    image: 'mongo:latest'
+    container_name: 'mongo'
     ports:
-      - "27017:27017"
+      - '27100:27017'
