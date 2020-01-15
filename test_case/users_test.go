@@ -2,6 +2,7 @@ package testing
 
 import (
 	"bytes"
+	"goserviceJenkinsDocker/config"
 	"goserviceJenkinsDocker/controllers"
 	"net/http"
 	"net/http/httptest"
@@ -10,6 +11,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func databaseCollection(collection string) error {
+	mongoSession := config.ConnectDb(config.Database)
+	defer mongoSession.Close()
+
+	sessionCopy := mongoSession.Copy()
+	defer sessionCopy.Close()
+
+	getCollection := sessionCopy.DB(config.Database).C(collection)
+	err := getCollection.Create(nil)
+	return err
+}
+
 func TestCreateEntry(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
@@ -17,6 +30,7 @@ func TestCreateEntry(t *testing.T) {
 	// register your routes.
 	var jsonStr = []byte(`{"name":"xyz","email":"xyz@pqr.com"}`)
 	r := gin.Default()
+	databaseCollection("users")
 	r.POST("/api/user", controllers.SaveUserData)
 
 	req, err := http.NewRequest(http.MethodPost, "/api/user", bytes.NewBuffer(jsonStr))

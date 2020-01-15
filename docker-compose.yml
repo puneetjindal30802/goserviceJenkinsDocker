@@ -5,8 +5,8 @@ services:
     build: '.'
     ports:
       - '8080:8080'
-    volumes:
-      - './goserviceJenkinsDocker:/go/src/goserviceJenkinsDocker'
+    # volumes:
+    #   - './goserviceJenkinsDocker:/go/src/goserviceJenkinsDocker'
     depends_on:
       - 'mongo'
   mongo:
