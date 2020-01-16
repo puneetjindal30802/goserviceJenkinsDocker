@@ -51,7 +51,7 @@ func TestCreateEntry(t *testing.T) {
 	var jsonStr = []byte(`{"name":"xyz","email":"xyz@pqr.com"}`)
 	r := gin.Default()
 	fmt.Println("database funciton")
-	databaseCollection("users")
+	// databaseCollection("users")
 	r.POST("/api/user", controllers.SaveUserData)
 
 	req, err := http.NewRequest(http.MethodPost, "/api/user", bytes.NewBuffer(jsonStr))
