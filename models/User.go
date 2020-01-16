@@ -1,6 +1,9 @@
 package models
 
-import "goserviceJenkinsDocker/config"
+import (
+	"fmt"
+	"goserviceJenkinsDocker/config"
+)
 
 type User struct {
 	Id    int    `json:"_id" bson:"_id"`
@@ -14,6 +17,7 @@ type User struct {
  *	Return err
  */
 func SaveUserData(query interface{}) (err error) {
+	fmt.Println("Reached in models", query)
 	err = DbInsert(config.UsersCollection, query)
 
 	return err

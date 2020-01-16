@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"goserviceJenkinsDocker/config"
 	"goserviceJenkinsDocker/models"
 
@@ -26,6 +27,7 @@ func SaveUserData(c *gin.Context) {
 		})
 	}
 	user.Id = userId
+	fmt.Println("Reached in controllers", userId)
 	saveUserResp := models.SaveUserData(user)
 	if saveUserResp != nil {
 		c.JSON(config.FailureCode, gin.H{

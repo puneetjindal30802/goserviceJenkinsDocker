@@ -2,12 +2,14 @@ package models
 
 import (
 	"errors"
+	"fmt"
 	"goserviceJenkinsDocker/config"
 
 	"gopkg.in/mgo.v2/bson"
 )
 
 func DbInsert(collectionName string, query interface{}) error {
+	fmt.Println("reached to base file")
 	mongoSession := config.ConnectDb(config.Database)
 	defer mongoSession.Close()
 
