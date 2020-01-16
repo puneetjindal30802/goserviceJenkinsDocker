@@ -4,46 +4,43 @@ import (
 	"bytes"
 	"fmt"
 	"goserviceJenkinsDocker/controllers"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	"time"
 
 	"github.com/gin-gonic/gin"
-	"gopkg.in/mgo.v2"
 )
 
-func ConnectDb(merchantDb string) (mongoSession *mgo.Session) {
-	fmt.Println("Trying too Connect....")
-	mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:    []string{"mongo:27017"},
-		Timeout:  60 * time.Second,
-		Database: merchantDb,
-	}
+// func ConnectDb(merchantDb string) (mongoSession *mgo.Session) {
+// 	fmt.Println("Trying too Connect....")
+// 	mongoDBDialInfo := &mgo.DialInfo{
+// 		Addrs:    []string{"mongo:27017"},
+// 		Timeout:  60 * time.Second,
+// 		Database: merchantDb,
+// 	}
 
-	mongoSession, err := mgo.DialWithInfo(mongoDBDialInfo)
-	if err != nil {
-		log.Fatalf("CreateSession: %s\n", err)
-	}
-	mongoSession.SetMode(mgo.Monotonic, true)
-	fmt.Println("Connected")
-	return mongoSession
-}
+// 	mongoSession, err := mgo.DialWithInfo(mongoDBDialInfo)
+// 	if err != nil {
+// 		log.Fatalf("CreateSession: %s\n", err)
+// 	}
+// 	mongoSession.SetMode(mgo.Monotonic, true)
+// 	fmt.Println("Connected")
+// 	return mongoSession
+// }
 
-func databaseCollection(collection string) error {
-	fmt.Println("In database function function")
-	mongoSession := ConnectDb("test_jenkins")
-	defer mongoSession.Close()
+// func databaseCollection(collection string) error {
+// 	fmt.Println("In database function function")
+// 	mongoSession := ConnectDb("test_jenkins")
+// 	defer mongoSession.Close()
 
-	sessionCopy := mongoSession.Copy()
-	defer sessionCopy.Close()
+// 	sessionCopy := mongoSession.Copy()
+// 	defer sessionCopy.Close()
 
-	getCollection := sessionCopy.DB("test_jenkins").C(collection)
-	err := getCollection.Create(nil)
-	fmt.Println(err)
-	return err
-}
+// 	getCollection := sessionCopy.DB("test_jenkins").C(collection)
+// 	err := getCollection.Create(nil)
+// 	fmt.Println(err)
+// 	return err
+// }
 
 func TestCreateEntry(t *testing.T) {
 	fmt.Println("enter the function")
