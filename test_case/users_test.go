@@ -2,6 +2,7 @@ package testing
 
 import (
 	"bytes"
+	"fmt"
 	"goserviceJenkinsDocker/config"
 	"goserviceJenkinsDocker/controllers"
 	"net/http"
@@ -20,6 +21,7 @@ func databaseCollection(collection string) error {
 
 	getCollection := sessionCopy.DB(config.Database).C(collection)
 	err := getCollection.Create(nil)
+	fmt.Println(err)
 	return err
 }
 

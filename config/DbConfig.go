@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -19,6 +20,7 @@ type Counter struct {
  *	Return databse connection.
  */
 func ConnectDb(merchantDb string) (mongoSession *mgo.Session) {
+	fmt.Println("Trying too Connect....")
 	mongoDBDialInfo := &mgo.DialInfo{
 		Addrs:    []string{"mongo:27017"},
 		Timeout:  60 * time.Second,
@@ -30,7 +32,7 @@ func ConnectDb(merchantDb string) (mongoSession *mgo.Session) {
 		log.Fatalf("CreateSession: %s\n", err)
 	}
 	mongoSession.SetMode(mgo.Monotonic, true)
-
+	fmt.Println("Connected")
 	return mongoSession
 }
 
