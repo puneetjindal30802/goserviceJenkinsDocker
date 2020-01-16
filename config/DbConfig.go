@@ -22,7 +22,7 @@ type Counter struct {
 func ConnectDb(merchantDb string) (mongoSession *mgo.Session) {
 	fmt.Println("Trying too Connect....")
 	mongoDBDialInfo := &mgo.DialInfo{
-		Addrs:    []string{"mongo:27017"},
+		Addrs:    []string{"localhost:27017"},
 		Timeout:  60 * time.Second,
 		Database: merchantDb,
 	}
