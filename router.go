@@ -41,5 +41,5 @@ func NewRouter() {
 			})
 		}
 	}
-	router.Run(":9090")
+	router.Run(":8080")
 }
