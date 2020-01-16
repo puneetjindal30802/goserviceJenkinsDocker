@@ -55,7 +55,7 @@ func TestCreateEntry(t *testing.T) {
 	r.POST("/api/user", controllers.SaveUserData)
 
 	req, err := http.NewRequest(http.MethodPost, "/api/user", bytes.NewBuffer(jsonStr))
-	fmt.Println("after req", req, err)
+
 	if err != nil {
 		t.Fatalf("Couldn't create request: %v\n", err)
 	}
@@ -64,9 +64,11 @@ func TestCreateEntry(t *testing.T) {
 
 	// Create a response recorder so you can inspect the response
 	w := httptest.NewRecorder()
+	fmt.Println("after req 11111111111", req, err)
 
 	// Perform the request
 	r.ServeHTTP(w, req)
+	fmt.Println("after req 22222222222", req, err)
 
 	// Check to see if the response was what you expected
 	if w.Code != http.StatusOK {
