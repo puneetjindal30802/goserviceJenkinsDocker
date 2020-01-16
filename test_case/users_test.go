@@ -55,7 +55,7 @@ func TestCreateEntry(t *testing.T) {
 	r.POST("/api/user", controllers.SaveUserData)
 
 	req, err := http.NewRequest(http.MethodPost, "/api/user", bytes.NewBuffer(jsonStr))
-	fmt.Println("after req")
+	fmt.Println("after req", req, err)
 	if err != nil {
 		t.Fatalf("Couldn't create request: %v\n", err)
 	}
